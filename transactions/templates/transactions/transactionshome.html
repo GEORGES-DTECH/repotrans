@@ -1,0 +1,163 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<br>
+<br>
+<br>
+ <b>Welcome {{user.username}}</b>
+
+ <hr>
+  <b>REPORTS </b>                                  
+   
+
+  <div class="table-responsive">
+    <table id="reports" class="table table-sm  table-light table-bordered ">
+    <thead class="thead-dark">
+      <tr>
+    
+    <th scope="col" style="color:gold;">Total payable loans</th>
+    <th scope="col" style="color:gold;">Total payable interest</th>
+    <th scope="col" style="color: gold;">Capital invested</th>
+    
+   </tr>
+   <tbody>
+     <tr>
+     {%for transaction in transactions|slice:":1"%}
+     
+      <td><a href="" style="color:black;"><b>{{transaction.loans_total}}</b></a></td>
+      <td><a href="" style="color:black;"><b>{{transaction.interest_total}}</b></a></td>
+      <td><a href=" " style="color:black;"><b>{{transaction.current_loans_total}}</b></a></td>
+       
+     </tr>
+   </tbody>
+  {%endfor%}
+
+    </thead>
+   </table>
+  </div>
+ 
+ 
+       
+  
+ <hr style="background-color: black;">
+  
+  
+    <strong class="title">CLIENTS TRANSACTIONS </strong> 
+   
+   <a href="{%url 'transaction_create'%}" class="btn-primary badge-pill btn-sm ml-4">Add clients</a>
+   <br>
+   <br>
+   <div class="table-responsive ">
+        <table id="transactions" class="table table-sm  table-light table-bordered  table-hover">
+          
+          
+            
+          <thead class="thead-dark">
+                <tr>
+                    
+                    <th scope="col" style="color:gold;">Date</th>
+                    <th scope="col" style="color:gold;"> Name</th>
+                    <th scope="col" style="color:gold;">Loan given </th>
+                    <th scope="col" style="color:gold;">Loan payable</th>
+                    <th scope="col" style="color: gold;">Interest</th>
+                    <th scope="col" style="color: gold;">Repayments</th>
+                    <th scope="col" style="color: gold;">Weekly installments</th>
+                    <th scope="col" style="color: gold;">fines</th>
+                    <th scope="col" style="color: gold;">Loan balance</th>
+                    <th scope="col" style="color: gold;">Shedule</th>
+                    <th scope="col" style="color: gold;">wkly due day</th>
+                    <th scope="col" style="color: gold;">monthly due date</th>
+                </tr>
+            </thead>
+        
+            <tbody>
+                <tr>
+                {%for transaction in transactions%}
+                    
+                    
+                    
+                    <td> <a style="color:black;"> <b>{{transaction.transaction_date|date:'j b,y'}}</b></a></td>
+                    <td ><a href="{%url 'transaction_update' transaction.id%} " style="color:black;"><b>{{transaction.clients_name}}</b></a></td>
+         
+                    <td><b style="color:black;">{{transaction.loan_given}}</b></td>
+                    <td><b style="color:black;">{{transaction.loan_payable_amount}}</b></td>
+                    <td><b style="color:black;">{{transaction.interest_due}}</b></td>
+                    <td><b style="color:black;">{{transaction.repayment}}</b></td>
+                    <td><b style="color:black;">{{transaction.installments}}</b></td>
+                    <td><b style="color:black;">{{transaction.fines}}</b></td>
+                    <td><b style="color:black;">{{transaction.loan_balance_calculation}}</b></td>
+                    <td><b style="color:black;">{{transaction.agreed_shedule}}</b></td>
+                    <td><b style="color:black;">{{transaction.due_weekly_day}}</b></td>
+                    <td><b style="color:black;">{{transaction.due_month_date|date:'j b,y'}}</b></td>
+        
+                </tr>
+                 
+                   
+                </tbody>
+                {%endfor%}
+                <tbody>
+                  <tr>
+                   {%for transaction in transactions|slice:":1"%}
+                   
+                    <td> <a style="color:blue;"> <b></b></a></td>
+                    <td><b  style="color :blue;">TOTALS</b></td>
+         
+                    <td><b  style="color :blue;">{{transaction.loans_given_total}}</b></td>
+                    <td><b  style="color :blue;">{{transaction.loans_payable_total}}</b></td>
+                    <td><b  style="color :blue;">{{transaction.interest_total}}</b></td>
+                    <td><b  style="color :blue;">{{transaction.repayments_total}}</b></td>
+                    <td><b  style="color :blue;">{{transaction.principle_totals}}</b></td>
+                    <td><b  style="color :blue;">{{transaction.fines_total}}</b></td>
+                    <td><b  style="color :blue;"></b></td>
+                    <!-- <td><b  style="color :blue;">{{transaction.defaulted_days_total}}</b></td> -->
+                    <!-- <td><b  style="color :blue;">{{transaction.fines_total}}</b></td> -->
+                  </tr>
+                 
+                </tbody>
+                {%endfor%}
+                
+               
+                
+        </table>
+</div> 
+<br>
+
+<button class="btn-primary badge-pill btn-sm pt-2" onclick="exportDataToExcel('transactions')">Transactions to excel</button>
+<br>
+<hr style="background-color: black;">
+
+
+
+<hr style="background-color: black;">
+
+<!--transactions export code-->
+<script type="text/javascript">
+  
+  function exportDataToExcel(tableId ,filename="Performance 1"){
+      var downloadLink;
+      var dataType='application/vnd.ms-excel';
+      var tableSelect=document.getElementById(tableId)
+      var tableHtml=tableSelect.outerHTML.replace(/ /g,'%20');
+      //specify file name
+      filename=filename?filename+".xls":"excel_data.xls";
+
+      downloadLink=document.createElement('a');
+
+      if(navigator.msSaveOrOpenBlob){
+          var blob=new Blob(['\ufeff',tableHtml],{
+          type:datatype 
+          
+          });
+          navigator.msSaveOrOpenBlob(blob,filename)
+
+      }else{
+          downloadLink.href='data:' + dataType + ',' + tableHtml;
+          downloadLink.download=filename
+          downloadLink.click()
+      }
+      
+  }
+  </script>
+
+{%endblock%}
+
