@@ -1,0 +1,122 @@
+ {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+	<meta charset="UTF-8">
+<title>Repotrans</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <style>
+    *{
+      font-family: 'PT Serif', serif;
+    }
+  </style>
+  
+</head>
+<body style="background: #f2f2f2;" >
+
+  <header>
+  
+    <div class="container">
+      <nav class="navbar  navbar-expand-lg navbar-dark bg-dark fixed-top"> 
+      
+        
+
+
+        <a class="navbar-brand" href="{% url 'transaction_home'%}">
+         <img src="{% static 'home.jpg '%}"  height="30" width="30" class="d-inline-block-alighn-top"/>
+
+          <b style="color: gold;">Repotrans</b> 
+          </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ml-auto">
+          
+          {%if user.is_authenticated%}
+         
+          <a class="nav-item nav-link" href="" style="color: gold" ></a>
+          <a class="nav-item nav-link" href="{% url 'product_home'%}" style="color: gold">Accessories and electronics</a>
+          <a class="nav-item nav-link" href="{% url 'transaction_home'%}" style="color: gold">Loans</a>
+          <a class="nav-item nav-link" href="{% url 'cylinder_home'%}" style="color: gold">Cylinders</a>
+          <a class="nav-item nav-link" href="{% url 'sales_home'%}" style="color: gold">Sales</a>
+          
+          
+          <a  class="nav-item nav-link" href="{% url 'logout'%}" style="color: gold">logout</a>
+          <a href="" style="color: gold;">Welcome {{user.username}}</a>
+          {%else%}
+         
+          
+          
+          
+          
+          <a class="nav-item nav-link" href="{% url 'signup' %}" style="color: gold" >Sign up</a>
+          <a  class="nav-item nav-link" href="{% url 'login'%}" style="color: gold">Login</a>
+          
+          
+          {%endif%}
+        
+
+        </div>
+        </div>
+
+
+
+        </nav>
+      </div>
+
+
+
+  </header>
+
+  <div class="container pt-2" >
+    {%if messages%}
+    {%for message in messages%}
+
+    <div class="alert alert-{{message.tags}}">
+      {{message}}
+    </div>
+
+
+    {%endfor%}
+
+
+
+    {%endif%}
+
+    {% block content %}
+    
+
+    
+    {% endblock content %}
+
+  </div>
+
+
+
+
+
+ 
+
+  <footer class="text-muted">
+    <div class="container text-center">
+      <p>© Repotrans/mologas {% now "Y" %}</p>
+      <p>simple is better than complex</p>
+      <p>contact info phone: 0727574812</p>
+     
+      
+    </div>
+  </footer>
+
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ 
+
+
+
+</body>
+</html>

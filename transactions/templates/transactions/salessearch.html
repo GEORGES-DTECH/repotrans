@@ -1,0 +1,56 @@
+{%extends 'index.html'%}
+
+{%block content%}
+
+<br>
+<br>
+<br>
+    <strong style="color: blue;">SALES SEARCH RESULTS </strong> 
+   
+   <a href="{%url 'sales_home'%}" class="btn-primary badge-pill btn-sm ml-4">home</a>
+   
+   <hr>
+   <div class="table-responsive ">
+        <table id="dataTable" class="table table-sm  table-light table-bordered  table-hover">
+          
+          
+            
+          <thead class="table-light">
+                <tr>
+                    
+                    <th scope="col" style="color:black;">Date</th>
+                    <th scope="col" style="color:black;">Day</th>
+                    <th scope="col" style="color:black;"> Cylinders</th>
+                    <th scope="col" style="color:black;">Electronics/A</th>
+                    <th scope="col" style="color:black;">Loans repaid</th>
+                    <th scope="col" style="color: black;">Loans disbursed</th>
+                    <th scope="col" style="color: black;">Total</th>
+                    <th scope="col" style="color: black;">Added by</th> 
+                </tr>
+            </thead>
+        
+            <tbody>
+                <tr>
+                {%for sale in object_list%}
+                    
+                    
+                    
+                    <td><b><a href="{%url 'sales_update' sale.id%}" style="color: black;">{{sale.transaction_date|date:'j b,y'}}</a></b></td>
+                    <td ><b>{{sale.sales_day}}</b></td>
+         
+                    <td><b>{{sale.cylinder_sales}}</b></td>
+                    <td><b>{{sale.electronics_and_accessories_sales}}</b></td>
+                    <td><b>{{sale.loans_repaid}}</b></td>
+                    <td><b>{{sale.loans_disbursed}}</b></td>
+                    <td><b><a href="{%url 'sales_delete' sale.id%}" style="color: black;">{{sale.total_revenue}}</a></b></td>
+                    <td><b>{{sale.lender}}</b></td>   
+                    
+                </tr>
+                 </tbody>
+                {%endfor%}
+    </table>
+
+
+
+
+{%endblock%}

@@ -1,0 +1,64 @@
+{%extends 'index.html'%}
+
+{%block content%}
+
+<br>
+<br>
+<br>
+
+<form class="form-inline search" action="{%url 'sale_search'%}" method="get">
+    <input  name="q"  type="text" class="form-control mr-sm-2" type="search" placeholder="search by day or date" aria-label="Search"> 
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>  <form class="ml-4" style="color: black;">
+ </form>
+
+
+  <hr>
+    <strong style="color: blue;">SALES REPORTS </strong> 
+   
+   <a href="{%url 'sales_create'%}" class="btn-primary badge-pill btn-sm ml-4">Add sales</a>
+   
+   <hr>
+   <div class="table-responsive ">
+        <table id="dataTable" class="table table-sm  table-light table-bordered  table-hover">
+          
+          
+            
+          <thead class="table-light">
+                <tr>
+                    
+                    <th scope="col" style="color:black;">Date</th>
+                    <th scope="col" style="color:black;">Day</th>
+                    <th scope="col" style="color:black;"> Cylinders</th>
+                    <th scope="col" style="color:black;">Electronics/A</th>
+                    <th scope="col" style="color:black;">Loans repaid</th>
+                    <th scope="col" style="color: black;">Loans disbursed</th>
+                    <th scope="col" style="color: black;">Total</th>
+                    <th scope="col" style="color: black;">Added by</th>
+                </tr>
+            </thead>
+        
+            <tbody>
+                <tr>
+                {%for sale in sales%}
+                    
+                    
+                    
+                    <td><b><a href="{%url 'sales_update' sale.id%}" style="color: black;">{{sale.transaction_date|date:'j b,y'}}</a></b></td>
+                    <td ><b>{{sale.sales_day}}</b></td>
+         
+                    <td><b>{{sale.cylinder_sales}}</b></td>
+                    <td><b>{{sale.electronics_and_accessories_sales}}</b></td>
+                    <td><b>{{sale.loans_repaid}}</b></td>
+                    <td><b>{{sale.loans_disbursed}}</b></td>
+                    <td><b><a href="{%url 'sales_delete' sale.id%}" style="color: black;">{{sale.total_revenue}}</a></b></td>
+                    <td><b>{{sale.lender}}</b></td>
+                    
+                </tr>
+                 </tbody>
+                {%endfor%}
+    </table>
+
+
+
+
+{%endblock%}

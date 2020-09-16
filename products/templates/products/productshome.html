@@ -1,0 +1,70 @@
+{%extends 'index.html'%}
+
+{%block content%}
+
+<br>
+<br>
+<br>
+
+<form class="form-inline search" action="{%url 'product_search'%}" method="get">
+    <input  name="q"  type="text" class="form-control mr-sm-2" type="search" placeholder="search by date or product" aria-label="Search"> 
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>  <form class="ml-4" style="color: black;">
+ </form>
+        <hr>
+    <a href=""><strong style="color: blue;">PRODUCTS DETAILS </strong></a> 
+   
+   <a href="{%url 'product_create'%}" class="btn-primary badge-pill btn-sm ml-4">Add products</a><br>
+   {%for product in products|slice:":1"%}
+    <b>Sales today............</b>{{product.sales_today_total}}
+    {%endfor%}
+   <hr>
+   <div class="table-responsive ">
+        <table id="dataTable" class="table table-sm  table-light table-bordered  table-hover">
+          
+          
+            
+          <thead class="table-light">
+                    <th scope="col" style="color:black;">Date</th>
+                    <th scope="col" style="color:black;">Day</th>
+                    <th scope="col" style="color:black;"> Product name</th>
+                    <th scope="col" style="color:black;">For loan?</th>
+                    <th scope="col" style="color:black;">Product quantity</th>
+                    <th scope="col" style="color: black;">Sold products</th>
+                    <th scope="col" style="color:black;">Price for each</th>
+                    <th scope="col" style="color: black;">Total price</th>
+                    <th scope="col" style="color: black;">Remaining products</th>
+                    <th scope="col" style="color: black;">Added by</th>
+  
+                </tr>
+            </thead>
+        
+            <tbody>
+                <tr>
+                {%for product in products%}
+                    
+                    
+                    
+                    <td>  <b><a href="{%url 'product_update' product.id%}" style="color: black;">{{product.transaction_date|date:'j b,y'}}</a></b></td>
+                    <td ><b>{{product.sales_day}}</b></td>
+                    <td ><b>{{product.product_name}}</b></td>
+                    <td ><b>{{product.is_it_for_loan}}</b></td>
+         
+                    <td><b>{{product.product_quantity}}</b></td>
+                    <td><b>{{product.product_quantity_sold}}</b></td>
+                    <td><b>{{product.product_price}}</b></td>
+                    <td><b>{{product.actual_price}}</b></td>
+                   
+                    
+                    <td><b><a href="{%url 'product_delete' product.id%}" style="color: black;">{{product.remaining_stock}}</a></b></td>
+                    <td><b>{{product.lender}}</b></td>
+                   
+                    
+                </tr>
+                 </tbody>
+                {%endfor%}
+    </table>
+
+
+
+
+{%endblock%}

@@ -7,37 +7,19 @@
 <br>
 
 
-<strong style="color: blue;">REPORTS </strong><br>
-{%for transaction in transactions|slice:":1"%}
-<b>Total payable loans......</b>{{transaction.loans_payable_total}} <br>
-<b>Total interest...............</b>{{transaction.interest_total}} <br>
-<b>Total loans given........</b>{{transaction.loans_given_total}} <br>
-<b>Total loan balances......</b>{{transaction.loan_balance_total}}<br>
-<b>Loans repaid.................</b>{{transaction.loans_repaid_total}}<br>
-<b>Loans disbursed..........</b>{{transaction.loans_disbursed_total}} <br>
-<b>Cash today.................</b>{{transaction.cash_today_total}} <br>
-<b>Date today.............. </b>{{transaction.the_date_today|date:'j b,y'}}
-
-{%endfor%}
 
 
 
-<hr>
 
-  <form class="form-inline search" action="{%url 'search_results'%}" method="get">
-    <input  name="q"  type="text" class="form-control mr-sm-2" type="search" placeholder=" id.no or repayment day" aria-label="Search"> 
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>  <form class="ml-4" style="color: black;">
-  </form>                                 
 
-<hr>
 
-  <strong style="color: blue;">CLIENTS TRANSACTIONS </strong> 
+  <strong style="color: blue;">SEARCH RESULTS </strong> 
    
    <a href="{%url 'transaction_create'%}" class="btn-primary badge-pill btn-sm ml-4">add clients</a>
-   
+   <a href="{%url 'transaction_home'%}" class="btn-primary badge-pill btn-sm ml-4">back to loans</a>
    <hr>
 
- {%for transaction in transactions%}
+ {%for transaction in object_list%}
   <div onclick="window.location='{%url 'transaction_update' transaction.id%}';" style="cursor: pointer;" >
    <b style="color: blue;">Client details</b> 
         

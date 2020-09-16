@@ -1,0 +1,73 @@
+{%extends 'index.html'%}
+
+{%block content%}
+
+<br>
+<br>
+<br>
+
+<strong style="color: blue;">CYLINDERS </strong> 
+   
+<a href="{%url 'cylinder_create'%}" class="btn-primary badge-pill btn-sm ml-4">Add cylinders</a> <br>
+
+
+{%for cylinder in cylinders|slice:":1"%} 
+<b>Total sales</b>......{{cylinder.sales_total}} <br>
+<b>Burners</b>......{{cylinder.burners_total}} <br>
+<b>Grills</b>......{{cylinder.grills_total}} <br>
+<b>Pipes/other accessories</b>......{{cylinder.accessories_total}}
+{%endfor%}
+
+<hr>
+{%for cylinder in cylinders%}
+<div onclick="window.location='{%url 'cylinder_update' cylinder.id%}';" style="cursor: pointer;" >
+   <b style="color: blue;">Cylinder details</b> 
+        
+      <br>
+       <b > Capacity/system..........................</b>{{cylinder.cylinder_capacity}}
+
+        <!-- <br> -->
+        
+       <!-- <b > Item.................................</b>{{cylinder.item}} -->
+
+        <br> 
+        
+        <b> Transaction date...........</b>{{cylinder.transaction_date|date:'j b,y'}}
+      
+         <br>
+        <b> Transaction day..............</b>{{cylinder.transaction_day}}
+      
+         <br>
+
+        <b>Total cylinders.........................</b>{{cylinder.total_cylinders}}
+       
+
+        <br>
+     
+        <b>Taken for refilling...................</b>{{cylinder.cylinders_taken_for_refilling}}
+
+         <br>
+     
+        <b>Available cylinders for sale</b>....{{cylinder.remaining_cylinders}}
+       
+        
+        <br>
+     
+        <b>Cylinders exchanged...............</b>{{cylinder.cylinders_exchanged}}
+       
+         
+        
+        
+        <br>
+        <b>Total amount.....................</b>{{cylinder.collection_for_the_day}}
+        <br>
+     
+        <b>Seller..................</b>{{cylinder.lender}}
+
+        <a href="{%url 'cylinder_delete' cylinder.id%}" class="btn-primary badge-pill btn-sm ml-4">delete</a> 
+        
+   <hr>
+</div>
+{%endfor%}   
+
+{%endblock%}
