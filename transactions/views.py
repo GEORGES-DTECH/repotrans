@@ -130,12 +130,13 @@ class CylinderCreateView(LoginRequiredMixin, CreateView):
     
     'item',
     'cylinder_capacity',
-    'total_cylinders',
-    'cylinders_taken_for_refilling',
+    # 'total_cylinders',
+    # 'cylinders_taken_for_refilling',
     'transaction_day',
     'cylinders_exchanged',
     'exchange_price',
-    'total_cylinder_sales',
+    'total_cylinder_exchange_amount',
+    'total_complete_cylinder_sales',
     'burners',
     'grills',
     'other_accessories'
@@ -154,12 +155,13 @@ class CylinderUpdateView(LoginRequiredMixin,  UpdateView):
     fields = [
     'item',
     'cylinder_capacity',
-    'total_cylinders',
-    'cylinders_taken_for_refilling',
+    # 'total_cylinders',
+    # 'cylinders_taken_for_refilling',
     'transaction_day',
     'cylinders_exchanged',
     'exchange_price',
-    'total_cylinder_sales',
+    'total_cylinder_exchange_amount',
+    'total_complete_cylinder_sales',
     'burners',
     'grills',
     'other_accessories'
@@ -196,6 +198,7 @@ class SaleCreateView(LoginRequiredMixin, CreateView):
     fields = [
     'todays_sale',
     'sales_day',
+    'cash_in_hand',
     'cylinder_sales',
     'electronics_and_accessories_sales',
     'loans_repaid',
@@ -214,6 +217,7 @@ class SaleUpdateView(LoginRequiredMixin,  UpdateView):
     fields = [
     'todays_sale',
     'sales_day',
+    'cash_in_hand',
     'cylinder_sales',
     'electronics_and_accessories_sales',
     'loans_repaid',

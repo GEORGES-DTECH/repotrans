@@ -9,13 +9,13 @@
 
 <strong style="color: blue;">REPORTS </strong><br>
 {%for transaction in transactions|slice:":1"%}
-<b>Total payable loans......</b>{{transaction.loans_payable_total}} <br>
+<!-- <b>Total payable loans......</b>{{transaction.loans_payable_total}} <br> -->
 <b>Total interest...............</b>{{transaction.interest_total}} <br>
-<b>Total loans given........</b>{{transaction.loans_given_total}} <br>
-<b>Total loan balances......</b>{{transaction.loan_balance_total}}<br>
+<!-- <b>Total loans given........</b>{{transaction.loans_given_total}} <br> -->
+<!-- <b>Total loan balances......</b>{{transaction.loan_balance_total}}<br> -->
 <b>Loans repaid.................</b>{{transaction.loans_repaid_total}}<br>
 <b>Loans disbursed..........</b>{{transaction.loans_disbursed_total}} <br>
-<b>Cash today.................</b>{{transaction.cash_today_total}} <br>
+<!-- <b>Cash today.................</b>{{transaction.cash_today_total}} <br> -->
 <b>Date today.............. </b>{{transaction.the_date_today|date:'j b,y'}}
 
 {%endfor%}

@@ -12,10 +12,11 @@
 
 
 {%for cylinder in cylinders|slice:":1"%} 
-<b>Total sales</b>......{{cylinder.sales_total}} <br>
-<b>Burners</b>......{{cylinder.burners_total}} <br>
+<b>Total cylinder exchange amount</b>......{{cylinder.sales_total}} <br>
+<b>Total cylinder sales amount</b>......{{cylinder.complete_sales_total}} <br>
+<b>Burners</b>...........{{cylinder.burners_total}} <br>
 <b>Grills</b>......{{cylinder.grills_total}} <br>
-<b>Pipes/other accessories</b>......{{cylinder.accessories_total}}
+<b>accessories</b>...........{{cylinder.accessories_total}}
 {%endfor%}
 
 <hr>
@@ -37,18 +38,18 @@
          <br>
         <b> Transaction day..............</b>{{cylinder.transaction_day}}
       
-         <br>
+         <!-- <br> -->
 
-        <b>Total cylinders.........................</b>{{cylinder.total_cylinders}}
+        <!-- <b>Total cylinders.........................</b>{{cylinder.total_cylinders}} -->
        
 
-        <br>
+        <!-- <br> -->
      
-        <b>Taken for refilling...................</b>{{cylinder.cylinders_taken_for_refilling}}
+        <!-- <b>Taken for refilling...................</b>{{cylinder.cylinders_taken_for_refilling}} -->
 
-         <br>
+         <!-- <br> -->
      
-        <b>Available cylinders for sale</b>....{{cylinder.remaining_cylinders}}
+        <!-- <b>Available cylinders for sale</b>....{{cylinder.remaining_cylinders}} -->
        
         
         <br>
@@ -64,7 +65,7 @@
      
         <b>Seller..................</b>{{cylinder.lender}}
 
-        <a href="{%url 'cylinder_delete' cylinder.id%}" class="btn-primary badge-pill btn-sm ml-4">delete</a> 
+        <a href="{%url 'cylinder_delete' cylinder.id%}" class="btn-danger badge-pill btn-sm ml-4">delete</a> 
         
    <hr>
 </div>

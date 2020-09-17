@@ -200,7 +200,8 @@ class Cylinder(models.Model):
     cylinders_taken_for_refilling = models.IntegerField(default=0)
     exchange_price = models.IntegerField(default=0)
     cylinders_exchanged = models.IntegerField(default=0)
-    total_cylinder_sales = models.IntegerField(default=0)
+    total_cylinder_exchange_amount = models.IntegerField(default=0)
+    total_complete_cylinder_sales=models.IntegerField(default=0)
     other_accessories = models.IntegerField(default=0)
     burners = models.IntegerField(default=0)
     grills = models.IntegerField(default=0)
@@ -220,9 +221,14 @@ class Cylinder(models.Model):
         return self.cylinders_exchanged * self.exchange_price
     
     def sales_total(self):
-        method = Cylinder.objects.aggregate(total=Sum('total_cylinder_sales'))
+        method = Cylinder.objects.aggregate(total=Sum('total_cylinder_exchange_amount'))
         return method['total']
     
+    def complete_sales_total(self):
+        method = Cylinder.objects.aggregate(total=Sum('total_complete_cylinder_sales'))
+        return method['total']
+    
+
     def burners_total(self):
         method = Cylinder.objects.aggregate(total=Sum('burners'))
         return method['total']
@@ -250,6 +256,7 @@ class Sale(models.Model):
     sales_day = models.CharField(max_length=100, choices=CHOICES)
     todays_sale = models.CharField(max_length=200, default='add sales')
     cylinder_sales = models.IntegerField(default=0)
+    cash_in_hand=models.IntegerField(default=0)
     electronics_and_accessories_sales = models.IntegerField(default=0)
     loans_disbursed = models.IntegerField(default=0)
     loans_repaid = models.IntegerField(default=0)
@@ -263,4 +270,4 @@ class Sale(models.Model):
         return reverse('sales_home')
 
     def total_revenue(self):
-        return self.cylinder_sales+self.electronics_and_accessories_sales+self.loans_repaid-self.loans_disbursed
+        return self.cash_in_hand+self.cylinder_sales+self.electronics_and_accessories_sales+self.loans_repaid-self.loans_disbursed

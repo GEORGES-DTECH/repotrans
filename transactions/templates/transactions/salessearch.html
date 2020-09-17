@@ -20,8 +20,9 @@
                     
                     <th scope="col" style="color:black;">Date</th>
                     <th scope="col" style="color:black;">Day</th>
+                    <th scope="col" style="color:black;">Cash in hand</th>
                     <th scope="col" style="color:black;"> Cylinders</th>
-                    <th scope="col" style="color:black;">Electronics/A</th>
+                    <th scope="col" style="color:black;">Electronics/Acs</th>
                     <th scope="col" style="color:black;">Loans repaid</th>
                     <th scope="col" style="color: black;">Loans disbursed</th>
                     <th scope="col" style="color: black;">Total</th>
@@ -37,7 +38,7 @@
                     
                     <td><b><a href="{%url 'sales_update' sale.id%}" style="color: black;">{{sale.transaction_date|date:'j b,y'}}</a></b></td>
                     <td ><b>{{sale.sales_day}}</b></td>
-         
+                    <td ><b>{{sale.cash_in_hand}}</b></td>
                     <td><b>{{sale.cylinder_sales}}</b></td>
                     <td><b>{{sale.electronics_and_accessories_sales}}</b></td>
                     <td><b>{{sale.loans_repaid}}</b></td>
