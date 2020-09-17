@@ -16,7 +16,7 @@
   <strong style="color: blue;">SEARCH RESULTS </strong> 
    
    <a href="{%url 'transaction_create'%}" class="btn-primary badge-pill btn-sm ml-4">add clients</a>
-   <a href="{%url 'transaction_home'%}" class="btn-primary badge-pill btn-sm ml-4">back to loans</a>
+   <a href="{%url 'transaction_home'%}" class="btn-primary badge-pill btn-sm ml-4">home</a>
    <hr>
 
  {%for transaction in object_list%}
@@ -59,8 +59,8 @@
          <br>
      
         <b>Loan balance..........................</b>{{transaction.loan_balance_calculation}}
-         <br>
-        <b>Fines charged..</b>{{transaction.fines_charged}}<b>|Default days</b>:{{transaction.defaulted_days}}<b>|Fines</b>:{{transaction.fines_calculation}}
+         <!-- <br> -->
+        <!-- <b>Fines charged..</b>{{transaction.fines_charged}}<b>|Default days</b>:{{transaction.defaulted_days}}<b>|Fines</b>:{{transaction.fines_calculation}} -->
 
         
          <br>
@@ -73,7 +73,7 @@
         <b>Security offered..</b>{{transaction.security_offered}}
         <br>
         <b>Approved by.......</b>{{transaction.lender}}
-        <a href="{%url 'transaction_delete' transaction.id%}" class="btn-primary badge-pill btn-sm ml-4">delete</a> 
+        <a href="{%url 'transaction_delete' transaction.id%}" class="btn-danger badge-pill btn-sm ml-4">delete</a> 
         
   </div>    
 <hr>

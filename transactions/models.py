@@ -24,29 +24,33 @@ class Transaction(models.Model):
         ('sunday', 'sunday'),
     )
 
-    RENEWAL = (
-        ('first time', 'first time'),
-        ('second time', 'second time'),
-        ('third time', 'third time'),
-        ('fourth time', 'fourth time'),
-        ('fifth time', 'fifth time'),
+    
+
+    STATUS = (
+        ('pending', 'pending'),
+        ('cleared', 'cleared'),
+        ('renew for the first time', 'renew for the first time'),
+        ('renew for the second time', 'renew for the second time'),
+        ('renew for the third time', 'renew for the third time'),
+        ('renew for the fourth time', 'renew for the fourth time'),
+        ('renew for the fifth time', 'renew for the fifth time'),
         
     )
-    clients_name = models.CharField(max_length=200)
-    id_number = models.CharField(max_length=20)
-    phone = models.CharField(max_length=20)
+    clients_name = models.CharField(max_length=200,blank=True)
+    id_number = models.CharField(max_length=20,blank=True)
+    phone = models.CharField(max_length=20,blank=True)
     amount_applied = models.IntegerField(default=0)
     amount_payable = models.IntegerField(default=0)
     defaulted_days = models.IntegerField(default=0)
     repayment = models.IntegerField(default=0)
     loan_disbursed = models.IntegerField(default=0)
     loan_repaid = models.IntegerField(default=0)
+
     fines_charged = models.IntegerField(default=0)
     transaction_fines = models.IntegerField(default=0)
     repayment_day = models.CharField(max_length=10, choices=CHOICES)
-    renewal_time=models.CharField(max_length=200,choices=RENEWAL,blank=True)
-    agreed_shedule = models.CharField(max_length=30, default='weekly')
-    physical_address = models.CharField(max_length=50)
+    loan_status = models.CharField(max_length=30, choices=STATUS,default='pending')
+    physical_address = models.CharField(max_length=50,blank=True)
     security_offered = models.CharField(max_length=200, blank=True)
     transaction_date = models.DateTimeField(default=timezone.now)
     lender = models.ForeignKey(User, on_delete=models.PROTECT)
@@ -78,14 +82,15 @@ class Transaction(models.Model):
         balance = self.amount_payable - self.repayment
         return balance
        
-
+   
     @property
     def due_weekly_date(self):
-        if self.agreed_shedule == "weekly":
+        if self.loan_status == "pending" or "cleared" or "renew first time" or "renew first time" \
+            or "renew third time" or "renew fourth time" or "renew fifth time":
             date = self.transaction_date
             due_date = date + relativedelta(weeks=+1)
             return due_date
-
+    '''
     @property
     def loan_status(self):
         method = self.loan_balance_calculation
@@ -99,7 +104,7 @@ class Transaction(models.Model):
         else:
             return "pending"
        
-
+    '''
     
 
     @property

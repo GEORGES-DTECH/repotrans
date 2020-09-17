@@ -45,12 +45,13 @@ class TransactionCreateView(LoginRequiredMixin, CreateView):
     'repayment_day',
     'amount_payable',
     'repayment',
-    'renewal_time',
-    'fines_charged',
-    'agreed_shedule',
+    'loan_status',
+    
+    
     'loan_disbursed',
     'loan_repaid',
-    'defaulted_days',
+    
+    
 ]
 
     def form_valid(self, form):
@@ -71,12 +72,12 @@ class TransactionUpdateView(LoginRequiredMixin,  UpdateView):
     'repayment_day',
     'amount_payable',
     'repayment',
-    'renewal_time',
-    'fines_charged',
-    'agreed_shedule',
+    'loan_status',
     'loan_disbursed',
     'loan_repaid',
-    'defaulted_days',
+    
+    
+    
     ]
     # form verification
 
@@ -97,9 +98,13 @@ class SearchResultView(ListView):
     template_name = 'transactions/searchresults.html'
     
     def get_queryset(self):
+        
         query = self.request.GET.get('q')
-        object_list = Transaction.objects.filter(Q(id_number__icontains=query)| Q(repayment_day__icontains=query))
+        object_list = Transaction.objects.filter(Q(id_number__icontains=query)| Q(repayment_day__icontains=query)|Q(loan_status__icontains=query))
         return object_list
+        
+            
+        
 
 
 

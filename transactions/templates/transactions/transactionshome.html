@@ -25,7 +25,7 @@
 <hr>
 
   <form class="form-inline search" action="{%url 'search_results'%}" method="get">
-    <input  name="q"  type="text" class="form-control mr-sm-2" type="search" placeholder=" id.no or repayment day" aria-label="Search"> 
+    <input  name="q"  type="text" class="form-control mr-sm-2" type="search" placeholder=" id.no or rp.day or loan status" aria-label="Search"> 
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>  <form class="ml-4" style="color: black;">
   </form>                                 
 
@@ -71,14 +71,15 @@
 
          <br>
      
-        <b>Repayment date.....................</b>{{transaction.due_weekly_date|date:'j b,y'}}
+       
+      <b>Repayment date.....................</b>{{transaction.due_weekly_date|date:'j b,y'}}
 
         
          <br>
      
         <b>Loan balance..........................</b>{{transaction.loan_balance_calculation}}
-         <br>
-        <b>Fines charged..</b>{{transaction.fines_charged}}<b>|Default days</b>:{{transaction.defaulted_days}}<b>|Fines</b>:{{transaction.fines_calculation}}
+         <!-- <br> -->
+        <!-- <b>Fines charged..</b>{{transaction.fines_charged}}<b>|Default days</b>:{{transaction.defaulted_days}}<b>|Fines</b>:{{transaction.fines_calculation}} -->
 
         
          <br>
@@ -91,7 +92,7 @@
         <b>Security offered..</b>{{transaction.security_offered}}
         <br>
         <b>Approved by.......</b>{{transaction.lender}}
-        <a href="{%url 'transaction_delete' transaction.id%}" class="btn-primary badge-pill btn-sm ml-4">delete</a> 
+        <a href="{%url 'transaction_delete' transaction.id%}" class="btn-danger badge-pill btn-sm ml-4">delete</a> 
         
   </div>    
 <hr>
